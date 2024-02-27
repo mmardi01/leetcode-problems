@@ -1,11 +1,14 @@
 function gcdOfStrings(str1: string, str2: string): string {
-    for(let i = 0; i< str1.length; i++) {
-    }
+    
+    if (str1 + str2 !== str2 + str1)
+        return "";
+
+
 };
 
 /*
-    |
-    A B C A B C
-              
-    A B C
+    A   B   C   A   B   C
+    ^
+    A   B   C
+    ^
 */

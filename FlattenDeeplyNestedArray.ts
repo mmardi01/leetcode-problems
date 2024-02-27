@@ -4,32 +4,28 @@ var flat = function (
   arr: MultiDimensionalArray,
   n: number
 ): MultiDimensionalArray {
+  let splited : string  = JSON.stringify(arr)
+  let res : string[] = [];
   let depth = -1;
-  let strArray = JSON.stringify(arr);
-  console.log(strArray)
-  let str = "";
-  for (let i = 0; i < strArray.length; i++) {
-    if (strArray[i] === "[") {
-      depth++;
-    }
-    if (strArray[i] === "]") {
-      depth--;
-    }
-
-    if (depth > 0 && depth <= n && strArray[i] === "[") {
+  console.log(splited)
+  for(let i = 0; i < splited.length; i++) {
+    if (splited[i] === ',')
       continue;
-    } else if (depth >= 0 && depth < n && strArray[i] === "]") continue;
-    str = str.concat(strArray[i]);
-  }
-  try {
-    return JSON.parse(str);
-  }
-  catch {
+    if (splited[i] === '[')
+      depth++;
+    if (splited[i] === ']')
+      depth--;
+    if (splited[i] === '[' && depth > 0 && depth <= n)
+      continue;
+    if (splited[i] === ']' && depth > -1 &&  depth  < n) {
 
-      return [];
     }
+  }
+
+  // console.log(JSON.parse(res.join(''))) 
+  return [];
 };
 
-const arr = [[],[],[],[],[],[],[],[],[],[]];
+const arr = [1, 2, 3, [4, 5, 6], [7, 8, [9, 10, 11], 12], [13, 14, 15]];
 
-console.log(flat(arr, 2));
+console.log(flat(arr, 1));
